@@ -1,6 +1,3 @@
-// You should NOT change the HTML or CSS in this project (at least until you reach
-// the bonus objectives). Focus on the JavaScript.
-
 const findInput = document.querySelector(".find-input")
 const replaceInput = document.querySelector(".replace-input")
 const replaceAllButton = document.querySelector(".replace-all-button")
@@ -10,17 +7,39 @@ const replaceAllButton = document.querySelector(".replace-all-button")
 // this array.
 const rowElements = document.querySelectorAll(".row")
 
-// When you call the function belwo, it will get and return an INNER ARRAY
+// When you call the function below, it will get and return an INNER ARRAY
 // containing the cell elements for a given row.
 // Call this function from WITHIN your row elements loop. Then you will, in turn,
 // need to loop over the resulting cell elements. But where should this whole
 // NESTED LOOP go? Think through the user's experience: when should WHAT happen? 
-function getCellElements (currentRowElement) {
+function getCellElements(currentRowElement) {
     return currentRowElement.querySelectorAll(".cell")
 }
 
 
 // YOUR CODE GOES HERE
+replaceAllButton.addEventListener('click', function () {
+    console.log('button click');
+    let findString = findInput.value
+    let replaceString = replaceInput.value
+    for (let counter = 0; counter < rowElements.length; counter++) {
+        console.log('Row Element Array', rowElements[counter])
+        let row = rowElements[counter]
+        const cellElements = getCellElements(row)
+        console.log(cellElements)
+        for (let cellIndex = 0; cellIndex < cellElements.length; cellIndex++) {
+            console.log('Cell Element', cellElements[cellIndex])
+            let cell = cellElements[cellIndex]
+            let cellString = cell.innerHTML
+            if (cellString.includes(findString)) {
+                cellString.replace(findString, replaceString)
+                cell.innerHTML = cellString.replace(findString, replaceString)
+            }
+
+        }
+    }
+});
+
 
 
 // One last thing: dedicate very careful attention to using variables and
